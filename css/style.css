@@ -1,0 +1,666 @@
+/* =========================================================================
+   PRIYANSH TIWARI — RESUME WEBSITE STYLESHEET
+   Design System: Editorial Case Brief
+   Palette: Deep Ink (#12151c), Warm Paper (#f4f5f0), Muted Amber (#d9a441)
+   ========================================================================= */
+
+/* ---------- 1. Design Tokens & Variables ---------- */
+:root {
+  --ink:          #12151c;   /* Primary dark: header, footer, text */
+  --ink-soft:     #2f3542;   /* Secondary text */
+  --paper:        #f4f5f0;   /* Light canvas background */
+  --paper-card:   #ffffff;   /* Pure white card backgrounds */
+  --line:         #d9dcd5;   /* Subtle divider lines */
+  --accent:       #d9a441;   /* Amber gold for highlights and borders */
+  --accent-dark:  #8c6414;   /* Accessible high-contrast amber */
+  --teal-muted:   #346860;   /* Muted teal for bullet points */
+
+  --font-serif:   "Fraunces", Georgia, serif;
+  --font-sans:    "IBM Plex Sans", -apple-system, BlinkMacSystemFont, sans-serif;
+  --font-mono:    "IBM Plex Mono", Consolas, monospace;
+
+  --max-width:    1080px;
+  --radius:       6px;
+}
+
+/* ---------- 2. Base & Reset Elements ---------- */
+* {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  margin: 0;
+  background-color: var(--paper);
+  color: var(--ink);
+  font-family: var(--font-sans);
+  font-size: 17px;
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+}
+
+h1, h2, h3 {
+  font-family: var(--font-serif);
+  font-weight: 600;
+  line-height: 1.15;
+  margin: 0 0 0.5em;
+  color: var(--ink);
+}
+
+h1 { font-size: clamp(2.4rem, 5vw, 4rem); font-weight: 600; }
+h2 { font-size: clamp(1.7rem, 2.5vw, 2.3rem); }
+h3 { font-size: 1.15rem; }
+
+p {
+  margin: 0 0 1em;
+  max-width: 65ch;
+}
+
+a {
+  color: inherit;
+  text-decoration-color: rgba(18, 21, 28, 0.4);
+  text-underline-offset: 3px;
+  transition: color 150ms ease, text-decoration-color 150ms ease;
+}
+
+a:hover {
+  text-decoration-color: var(--accent);
+  color: var(--accent-dark);
+}
+
+ul {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+/* Reusable layout container */
+.wrap {
+  max-width: var(--max-width);
+  margin-left: auto;
+  margin-right: auto;
+  padding-left: 1.5rem;
+  padding-right: 1.5rem;
+}
+
+section {
+  padding-top: clamp(3rem, 6vw, 5rem);
+  padding-bottom: clamp(3rem, 6vw, 5rem);
+}
+
+.skip-link {
+  position: absolute;
+  left: -9999px;
+  top: 0;
+  background: var(--ink);
+  color: var(--paper);
+  padding: 0.75rem 1rem;
+  z-index: 100;
+}
+.skip-link:focus {
+  left: 1rem;
+  top: 1rem;
+}
+
+.eyebrow {
+  font-family: var(--font-mono);
+  font-size: 0.8rem;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: var(--ink-soft);
+  margin-bottom: 0.8rem;
+}
+.eyebrow-inverse {
+  color: rgba(244, 245, 240, 0.7);
+}
+
+.section-heading {
+  margin-bottom: 1.5rem;
+}
+.section-heading-inverse {
+  color: var(--paper);
+}
+
+/* ---------- 3. Sticky Navigation Bar ---------- */
+.site-header {
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  background: rgba(244, 245, 240, 0.92);
+  backdrop-filter: blur(8px);
+  border-bottom: 1px solid var(--line);
+}
+
+.header-inner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  min-height: 64px;
+}
+
+#top {
+  scroll-margin-top: 80px;
+}
+
+.brand {
+  font-family: var(--font-serif);
+  font-size: 1.4rem;
+  font-weight: 600;
+  text-decoration: none;
+  color: var(--ink);
+}
+.brand-dot {
+  color: var(--accent);
+}
+
+.primary-nav ul {
+  display: flex;
+  align-items: center;
+  gap: 1.8rem;
+}
+
+.primary-nav a {
+  font-size: 0.95rem;
+  font-weight: 500;
+  text-decoration: none;
+  color: var(--ink-soft);
+}
+.primary-nav a:hover {
+  color: var(--ink);
+}
+
+.nav-cta {
+  padding: 0.45em 1.1em;
+  border: 1px solid var(--ink);
+  border-radius: var(--radius);
+  color: var(--ink) !important;
+}
+.nav-cta:hover {
+  background: var(--ink);
+  color: var(--paper) !important;
+}
+
+.nav-toggle {
+  display: none;
+  flex-direction: column;
+  justify-content: center;
+  gap: 5px;
+  width: 38px;
+  height: 38px;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+}
+.nav-toggle span {
+  display: block;
+  height: 2px;
+  background: var(--ink);
+  border-radius: 2px;
+}
+
+/* ---------- 4. Hero Section & Photo Integration ---------- */
+.hero {
+  padding-top: clamp(3rem, 7vw, 5.5rem);
+}
+
+.hero-grid {
+  display: grid;
+  grid-template-columns: 1.3fr 1fr;
+  gap: 3.5rem;
+  align-items: center;
+}
+
+.hero-lede {
+  font-size: 1.18rem;
+  color: var(--ink-soft);
+}
+
+.hero-context {
+  font-family: var(--font-mono);
+  font-size: 0.88rem;
+  color: var(--ink-soft);
+}
+
+.hero-actions {
+  display: flex;
+  gap: 1rem;
+  margin-top: 1.8rem;
+  flex-wrap: wrap;
+}
+
+.btn {
+  display: inline-block;
+  padding: 0.75em 1.5em;
+  border-radius: var(--radius);
+  font-weight: 500;
+  text-decoration: none;
+  font-size: 0.95rem;
+  transition: transform 120ms ease, background-color 150ms ease;
+  border: 1px solid transparent;
+}
+.btn:hover {
+  transform: translateY(-2px);
+}
+.btn:active {
+  transform: translateY(0);
+}
+
+.btn-primary {
+  background: var(--ink);
+  color: var(--paper);
+}
+.btn-primary:hover {
+  background: #272d3b;
+}
+
+.btn-ghost {
+  border-color: var(--ink);
+  color: var(--ink);
+}
+.btn-ghost:hover {
+  background: var(--ink);
+  color: var(--paper);
+}
+
+.hero-figure {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1.8rem;
+}
+
+/* Profile Photo Frame */
+.photo-frame {
+  width: 170px;
+  height: 170px;
+  border-radius: 50%;
+  padding: 4px;
+  border: 2px solid var(--accent);
+  background: var(--paper-card);
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+}
+
+.profile-photo {
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  object-fit: cover;
+  display: block;
+}
+
+.hero-stat-list {
+  width: 100%;
+  display: grid;
+  gap: 0.85rem;
+}
+.hero-stat-list li {
+  display: flex;
+  justify-content: space-between;
+  gap: 1rem;
+  border-top: 1px solid var(--line);
+  padding-top: 0.6rem;
+}
+.stat-num {
+  font-family: var(--font-mono);
+  font-weight: 600;
+  white-space: nowrap;
+}
+.stat-label {
+  color: var(--ink-soft);
+  font-size: 0.88rem;
+  text-align: right;
+}
+
+/* ---------- 5. About Section ---------- */
+.about-grid {
+  display: grid;
+  grid-template-columns: 0.6fr 1.4fr;
+  gap: 2.5rem;
+}
+
+/* ---------- 6. Cards & Highlights ---------- */
+.highlight-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 1.25rem;
+}
+
+.card {
+  background: var(--paper-card);
+  border: 1px solid var(--line);
+  border-left: 4px solid var(--accent);
+  border-radius: var(--radius);
+  padding: 1.5rem;
+  transition: transform 150ms ease, box-shadow 150ms ease;
+}
+.card:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.06);
+}
+
+.card h3 {
+  margin-bottom: 0.35rem;
+  font-size: 1.1rem;
+}
+.card-meta {
+  font-family: var(--font-mono);
+  font-size: 0.8rem;
+  color: var(--ink-soft);
+  margin-bottom: 0.8rem;
+}
+
+.pill {
+  display: inline-block;
+  font-size: 0.75rem;
+  font-weight: 600;
+  padding: 0.3em 0.75em;
+  border-radius: 999px;
+  background: var(--paper);
+  border: 1px solid var(--line);
+}
+.pill-accent {
+  background: rgba(217, 164, 65, 0.18);
+  color: var(--accent-dark);
+  border-color: rgba(217, 164, 65, 0.4);
+  margin-bottom: 0.85rem;
+}
+
+/* ---------- 7. Experience Timeline ---------- */
+.timeline {
+  border-left: 2px solid var(--line);
+  display: flex;
+  flex-direction: column;
+  gap: 2.5rem;
+  padding-left: 1.8rem;
+  margin-left: 0.5rem;
+}
+
+.timeline-item {
+  position: relative;
+  display: grid;
+  grid-template-columns: 180px 1fr;
+  gap: 1.5rem;
+}
+
+.timeline-item::before {
+  content: "";
+  position: absolute;
+  left: -2.15rem;
+  top: 0.35rem;
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: var(--accent);
+  border: 2px solid var(--paper);
+  box-shadow: 0 0 0 2px var(--ink);
+}
+
+.timeline-date time {
+  font-family: var(--font-mono);
+  font-size: 0.85rem;
+  color: var(--ink-soft);
+}
+
+.timeline-content ul {
+  margin-top: 0.6rem;
+  display: grid;
+  gap: 0.55rem;
+}
+.timeline-content li {
+  padding-left: 1.2rem;
+  position: relative;
+}
+.timeline-content li::before {
+  content: "—";
+  position: absolute;
+  left: 0;
+  color: var(--teal-muted);
+}
+
+/* ---------- 8. Education Table (Box Model & Collapse) ---------- */
+.edu-table {
+  width: 100%;
+  border-collapse: collapse;
+  background: var(--paper-card);
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  overflow: hidden;
+}
+
+.edu-table th,
+.edu-table td {
+  text-align: left;
+  padding: 1rem 1.2rem;
+  border-bottom: 1px solid var(--line);
+}
+
+.edu-table th {
+  font-family: var(--font-mono);
+  font-size: 0.8rem;
+  text-transform: uppercase;
+  color: var(--ink-soft);
+  background: #eceee8;
+  font-weight: 600;
+}
+
+.edu-table tbody tr:nth-child(even) {
+  background: rgba(0, 0, 0, 0.015);
+}
+.edu-table tbody tr:last-child td {
+  border-bottom: none;
+}
+
+/* ---------- 9. Signature Project (Dark Band Contrast) ---------- */
+.signature {
+  background: var(--ink);
+  color: var(--paper);
+}
+
+.signature-grid {
+  display: grid;
+  grid-template-columns: 1.3fr 1fr;
+  gap: 3.5rem;
+  align-items: start;
+}
+
+.signature p {
+  color: rgba(244, 245, 240, 0.85);
+}
+.signature-role {
+  font-family: var(--font-mono);
+  font-size: 0.88rem;
+  color: var(--accent);
+  margin-bottom: 1.1rem;
+}
+
+.signature-stats {
+  display: grid;
+  gap: 1.4rem;
+}
+.signature-stats li {
+  border-top: 1px solid rgba(244, 245, 240, 0.2);
+  padding-top: 0.8rem;
+}
+.stat-num-inverse {
+  color: var(--accent);
+}
+.stat-label-inverse {
+  display: block;
+  color: rgba(244, 245, 240, 0.7);
+  font-size: 0.88rem;
+  margin-top: 0.25rem;
+}
+
+/* ---------- 10. Skills Section ---------- */
+.skills-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 2.5rem;
+  margin-bottom: 2.5rem;
+}
+
+.pill-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.55rem;
+  margin-top: 0.85rem;
+}
+.pill-list .pill {
+  background: var(--paper-card);
+}
+
+.interests {
+  border-top: 1px solid var(--line);
+  padding-top: 1.8rem;
+}
+.interests p {
+  font-family: var(--font-mono);
+  color: var(--ink-soft);
+  font-size: 0.95rem;
+}
+
+/* ---------- 11. Footer ---------- */
+.site-footer {
+  background: var(--ink);
+  color: var(--paper);
+  padding-top: clamp(3rem, 6vw, 5rem);
+}
+
+.footer-grid {
+  display: grid;
+  grid-template-columns: 1.2fr 1fr;
+  gap: 2.5rem;
+  padding-bottom: 2.5rem;
+}
+
+.footer-lede {
+  color: rgba(244, 245, 240, 0.78);
+}
+
+.contact-list {
+  display: grid;
+  gap: 0.75rem;
+  align-content: start;
+}
+.contact-list a {
+  font-family: var(--font-mono);
+  font-size: 0.95rem;
+  text-decoration: none;
+  color: var(--paper);
+  border-bottom: 1px solid rgba(244, 245, 240, 0.3);
+  padding-bottom: 0.2em;
+  width: fit-content;
+}
+.contact-list a:hover {
+  border-color: var(--accent);
+  color: var(--accent);
+}
+
+.footer-bottom {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-top: 1px solid rgba(244, 245, 240, 0.15);
+  padding-top: 1.4rem;
+  padding-bottom: 1.4rem;
+  font-size: 0.85rem;
+  color: rgba(244, 245, 240, 0.55);
+}
+.footer-bottom a {
+  color: rgba(244, 245, 240, 0.55);
+  text-decoration: none;
+}
+.footer-bottom a:hover {
+  color: var(--accent);
+}
+
+/* ---------- 12. Responsive Design (Media Queries) ---------- */
+@media (max-width: 860px) {
+  .hero-grid,
+  .about-grid,
+  .signature-grid,
+  .footer-grid,
+  .skills-grid {
+    grid-template-columns: 1fr;
+  }
+  .hero-figure {
+    order: -1;
+  }
+  .timeline-item {
+    grid-template-columns: 1fr;
+    gap: 0.5rem;
+  }
+}
+
+@media (max-width: 720px) {
+  .nav-toggle {
+    display: flex;
+  }
+
+  .primary-nav {
+    position: absolute;
+    top: 64px;
+    left: 0;
+    right: 0;
+    background: var(--paper);
+    border-bottom: 1px solid var(--line);
+    transform: translateY(-8px);
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 150ms ease, transform 150ms ease;
+  }
+  .primary-nav.is-open {
+    opacity: 1;
+    transform: translateY(0);
+    pointer-events: auto;
+  }
+  .primary-nav ul {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0;
+    padding: 0.5rem 1.5rem 1.2rem;
+  }
+  .primary-nav li {
+    width: 100%;
+  }
+  .primary-nav a {
+    display: block;
+    padding: 0.8em 0;
+    border-bottom: 1px solid var(--line);
+  }
+  .nav-cta {
+    border: none;
+    padding: 0.8em 0 !important;
+  }
+
+  /* Table becomes clean stacked cards on narrow mobile viewports */
+  .edu-table thead {
+    display: none;
+  }
+  .edu-table,
+  .edu-table tbody,
+  .edu-table tr,
+  .edu-table td {
+    display: block;
+    width: 100%;
+  }
+  .edu-table tr {
+    border-bottom: 1px solid var(--line);
+    padding: 0.8rem 0;
+  }
+  .edu-table td {
+    border: none;
+    padding: 0.25rem 0;
+  }
+  .edu-table td::before {
+    content: attr(data-label);
+    display: block;
+    font-family: var(--font-mono);
+    font-size: 0.72rem;
+    color: var(--ink-soft);
+    text-transform: uppercase;
+  }
+}
